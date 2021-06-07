@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
 import API from './services/image-api';
+
+import axios from 'axios';
 // style
 
 import './App.scss';
+
+const BASE_URL = 'https://restcountries.eu/rest/v2';
 class App extends Component {
-  getFeatch = () => {
-    API.featchImages().then(res => console.log(res));
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <ul>
-          <li>
-            <button type="button" onClick={this.getFeatch}>
-              click
-            </button>
-          </li>
-        </ul>
-      </div>
-    );
-  }
-}
-
-export default App;
+  componentDidMount() {
+    fetch(
+      `https://pixabay.com/api/videos/?key=21266258-ed1f1a426d97c1dcb24ced78e&q=yellow+flowers'`,
+    )
+      .then(response => { 43
