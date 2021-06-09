@@ -1,35 +1,44 @@
-import axios from 'axios';
-
-axios.defaults.headers.common['Authorization'] =
-  'Bearer 21266258-ed1f1a426d97c1dcb24ced78e';
-
 const featchImages = ({
-  searchQuery = 'car',
+  searchQuery = 'ukraine',
   currentPage = 1,
-  pageSize = 12,
-  orientation = 'horizontal',
-  imageType = 'photo',
+  imageType,
+  perPage = 12,
+  orientation,
 }) => {
-  return axios
-    .get(
-      `https://pixabay.com/api/?q=${searchQuery}&page=${currentPage}&image_type=${imageType}&orientation=${orientation}&per_page=${pageSize}
-`,
-    )
-    .then(response => response);
+  return fetch(
+    `https://pixabay.com/api/?q=${searchQuery}&page=${currentPage}&key=21266258-ed1f1a426d97c1dcb24ced78e&image_type=${imageType}&orientation=${orientation}&per_page=${perPage}`,
+  ).then(response => {
+    if (!response) {
+      throw response;
+    }
+    return response.json();
+  });
 };
 
-export default { featchImages };
+const imagesAPI = { featchImages };
 
-// const featchArticles = ({
-//   searchQuery = '',
+export default imagesAPI;
+
+//не працює
+// import axios from 'axios';
+// const MY_KEY = '21266258-ed1f1a426d97c1dcb24ced78e';
+// const BASE_URL = 'https://pixabay.com/api/';
+
+// const featchImages = ({
+//   searchQuery = 'ukraine',
 //   currentPage = 1,
-//   pageSize = 5,
+//   imageType,
+//   perPage = 12,
+//   orientation,
 // }) => {
-//   return axios
+//   axios
 //     .get(
-//       `https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=${pageSize}&page=${currentPage}`,
+//       `${BASE_URL}?q=${searchQuery}&page=${currentPage}&key=${MY_KEY}&image_type=${imageType}&orientation=${orientation}&per_page=${perPage}`,
 //     )
-//     .then(response => response.data.articles);
+//     .then(response => response);
 // };
 
-// export default { featchArticles };
+// const imagesAPI = {
+//   featchImages,
+// };
+// export default imagesAPI;
